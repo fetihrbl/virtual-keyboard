@@ -1,0 +1,168 @@
+:root {
+    --key-bg: #445760;
+    --key-active-bg: #1e88e5;
+    --key-text: #ffffff;
+    --key-shadow: rgba(0, 0, 0, 0.3);
+    --keyboard-bg: #202124;
+    --text-bg: #252525;
+    --text-color: #f8f8f8;
+    --border-color: rgba(255, 255, 255, 0.15);
+    --input-highlight: rgba(255, 255, 255, 0.08);
+    --neon-blue: rgba(30, 136, 229, 0.3);
+  }
+  
+  .keyboard {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: whitesmoke;
+    padding: 2rem;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+  }
+  
+  .text-container {
+    width: min(1018px, 90vw);
+    min-height: 140px;
+    max-height: 40vh;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    background: 
+      linear-gradient(145deg, #2a2a2a, #1f1f1f);
+    overflow: auto;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    box-shadow:
+      inset 0 1px 3px rgba(255, 255, 255, 0.1),
+      0 10px 25px rgba(0, 0, 0, 0.5),
+      0 0 15px var(--neon-blue);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .text-container::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 14px;
+    background: linear-gradient(45deg, 
+      rgba(30, 136, 229, 0.1), 
+      rgba(30, 136, 229, 0), 
+      rgba(30, 136, 229, 0.1));
+    z-index: -1;
+    pointer-events: none;
+  }
+  
+  .text-container:hover {
+    box-shadow:
+      inset 0 1px 3px rgba(255, 255, 255, 0.15),
+      0 12px 30px rgba(0, 0, 0, 0.6),
+      0 0 20px var(--neon-blue);
+  }
+  
+  .text-container pre {
+    margin: 0;
+    color: var(--text-color);
+    font-size: 1.25rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+    font-family: 'Fira Code', 'Courier New', monospace;
+  }
+  
+  /* Keyboard styling remains mostly the same but enhanced */
+  .container {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    width: min(980px, 95vw);
+    border-radius: 16px;
+    background: linear-gradient(145deg, #232327, #1d1d21);
+    box-shadow: 
+      0 10px 30px rgba(0, 0, 0, 0.6),
+      0 0 10px rgba(30, 136, 229, 0.2);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, 
+      transparent, 
+      rgba(30, 136, 229, 0.5), 
+      transparent);
+  }
+  
+  .key {
+    /* Previous key styles */
+    transition: all 0.2s cubic-bezier(0.22, 0.61, 0.36, 1);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .key::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0) 50%,
+      rgba(255, 255, 255, 0.1) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  
+  .key:hover::after {
+    opacity: 1;
+  }
+  
+  .key.active {
+    transform: translateY(2px);
+    box-shadow: 
+      0 0 15px var(--key-active-bg),
+      inset 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Add subtle animation to active keys */
+  @keyframes key-press {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.95); }
+    100% { transform: scale(1); }
+  }
+  
+  .key:active {
+    animation: key-press 0.2s ease;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .keyboard {
+      padding: 1rem;
+    }
+    
+    .text-container {
+      min-height: 100px;
+      padding: 1rem;
+      border-radius: 10px;
+    }
+    
+    .text-container pre {
+      font-size: 1rem;
+    }
+  }
